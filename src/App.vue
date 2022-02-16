@@ -22,10 +22,11 @@
         <section class="section" style="padding-top: .5rem">
             <div class="container">
                 <div class="columns">
-                    <div class="column">
+                    <div class="column is-12">
                         <horizontal-stepper :steps="demoSteps" @completed-step="completeStep" :top-buttons="true"
                                             @active-step="isStepActive" @stepper-finished="alert"></horizontal-stepper>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -52,6 +53,7 @@
     import StepThree from './components/StepThree.vue';
     import StepFour from './components/StepFour.vue';
     import StepFive from './components/StepFive.vue';
+    // import Preview from './components/Preview.vue';
     import Loading from 'vue-loading-overlay';
     // Import stylesheet
     import 'vue-loading-overlay/dist/vue-loading.css';
@@ -59,7 +61,7 @@
         name: 'app',
         components: {
             HorizontalStepper,
-            Loading
+            Loading,
         },
         data(){
             return {
@@ -169,7 +171,7 @@
 
               string = new CloudmersiveConvertApiClient.SingleReplaceString();
               string.matchString = "[#full_address#]"
-              string.replaceString = `${this.form.region}, ${this.form.city},вул ${this.form.street} ${this.form.building}/${this.form.flat}`;
+              string.replaceString = this.form.address;
               strings.push({...string})
 
               string = new CloudmersiveConvertApiClient.SingleReplaceString();
@@ -233,13 +235,37 @@
               string.matchString = "[#witnesses#]"
               string.replaceString = this.form.witnesses.map(function(item){
                 return `- ${item.last_name} ${item.first_name} ${item.middle_name}, ${item.address}, ${item.phone}`
-              }).join("\n");
+              }).join("\n\r<w:br/>");
               strings.push({...string})
+
+              let number = "";
+              if (this.form.second_question && !this.form.third_question && !this.form.fourth_question) {
+                number = "2"
+              }
+
+              if (this.form.second_question && this.form.third_question && !this.form.fourth_question) {
+                number = "3"
+              }
+
+              if (!this.form.second_question && this.form.third_question && !this.form.fourth_question) {
+                number = "1,4"
+              }
+
+              if (this.form.second_question && !this.form.third_question && this.form.fourth_question) {
+                number = "2,4"
+              }
+              if (this.form.second_question && this.form.third_question && this.form.fourth_question) {
+                number = "3,4"
+              }
+              if (!this.form.second_question && this.form.third_question && !this.form.fourth_question) {
+                number = "3,4"
+              }
 
               string = new CloudmersiveConvertApiClient.SingleReplaceString();
               string.matchString = "[#number#]"
-              string.replaceString = '1,4';
+              string.replaceString = number;
               strings.push({...string})
+
 
               string = new CloudmersiveConvertApiClient.SingleReplaceString();
               string.matchString = "[#injury_item#]"
@@ -327,5 +353,8 @@
     }
     .vertical-separator .line {
         border-right: 1px solid #cccccc;
+    }
+    ::v-deep .stepper-box .content {
+      margin: 7.5rem 0;
     }
 </style>

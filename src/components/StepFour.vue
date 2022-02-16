@@ -1,44 +1,50 @@
 <template>
     <div style="padding: 2rem 3rem; text-align: left;">
         <template v-for="(item, index) in form.witnesses">
-            <div class="columns" :key="index">
-                <div class="field column is-one-fifth">
-                    <label class="label">Ім'я</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Вкажіть ім'я свідка..."
-                               v-model="form.witnesses[index].first_name">
+            <div :key="index">
+                <div class="columns">
+                    <div class="field column is-4">
+                        <label class="label">Ім'я</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Вкажіть ім'я свідка..."
+                                   v-model="form.witnesses[index].first_name">
+                        </div>
+                    </div>
+                    <div class="field column is-4">
+                        <label class="label">Прізвище</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Вкажіть прізвище свідка..."
+                                   v-model="form.witnesses[index].last_name">
+                        </div>
+                    </div>
+                    <div class="field column is-4">
+                        <label class="label">По батькові</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Вкажіть ім'я свідка..."
+                                   v-model="form.witnesses[index].middle_name">
+                        </div>
                     </div>
                 </div>
-                <div class="field column is-one-fifth">
-                    <label class="label">Прізвище</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Вкажіть прізвище свідка..."
-                               v-model="form.witnesses[index].last_name">
+                <div class="columns">
+                    <div class="field column is-4">
+                        <label class="label">Адреса проживання</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Вкажіть адресу свідка..."
+                                   v-model="form.witnesses[index].address">
+                        </div>
+                    </div>
+                    <div class="field column is-4">
+                        <label class="label">Контактний телефон</label>
+                        <div class="control">
+                            <input class="input" type="text" v-mask="'38 0## ### ## ##'" placeholder="38 099 999 99 99" 
+                                   v-model="form.witnesses[index].phone">
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <label class="label">Дії</label>
+                        <button class="button" style="color:red" @click="remove(index)">Видалити</button>
                     </div>
                 </div>
-                <div class="field column is-one-fifth">
-                    <label class="label">По батькові</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Вкажіть ім'я свідка..."
-                               v-model="form.witnesses[index].middle_name">
-                    </div>
-                </div>
-
-                <div class="field column is-one-fifth">
-                    <label class="label">Адреса проживання</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Вкажіть адресу свідка..."
-                               v-model="form.witnesses[index].address">
-                    </div>
-                </div>
-                <div class="field column is-one-fifth">
-                    <label class="label">Контактний телефон</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Вкажіть телефон свідка..."
-                               v-model="form.witnesses[index].phone">
-                    </div>
-                </div>
-                <button class="button" style="color:red" @click="remove(index)">Видалити</button>
             </div>
         </template>
         <button class="button" style="color:blue" @click="add">Додати свідка</button>
