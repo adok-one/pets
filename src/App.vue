@@ -136,7 +136,7 @@
               const Apikey = defaultClient.authentications['Apikey'];
               Apikey.apiKey = "d3826900-ad0b-41e7-b3ac-866a1b913235"
               const api = new CloudmersiveConvertApiClient.EditDocumentApi();
-              const url = 'https://privfile.com/download.php?fid=620c51efd4efb-MTI0OTE='
+              const url = 'https://privfile.com/download.php?fid=620c55cfc6c42-MTI0OTI='
   
               const reqConfig = new CloudmersiveConvertApiClient.MultiReplaceStringRequest();
               const strings = []
