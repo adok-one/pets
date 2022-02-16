@@ -1,5 +1,7 @@
 <template>
     <div id="app">
+        <loading :active.sync="isLoading" :is-full-page="true"></loading>
+
         <!--Example dependecies-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
         <!--Example Elements-->
@@ -42,7 +44,7 @@
 </template>
 
 <script>
-  import "vue-select/dist/vue-select.css";
+  // import "vue-select/dist/vue-select.css";
     import { saveAs } from 'file-saver';
     import HorizontalStepper from 'vue-stepper';
     import StepOne from './components/StepOne.vue';
@@ -50,14 +52,18 @@
     import StepThree from './components/StepThree.vue';
     import StepFour from './components/StepFour.vue';
     import StepFive from './components/StepFive.vue';
-
+    import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+    import 'vue-loading-overlay/dist/vue-loading.css';
     export default {
         name: 'app',
         components: {
-            HorizontalStepper
+            HorizontalStepper,
+            Loading
         },
         data(){
             return {
+                isLoading: false,
                 form: {},
                 demoSteps: [
                     {
@@ -244,8 +250,9 @@
               reqConfig.replaceStrings = strings
 
               console.log(reqConfig)
-              const callback = function(error, data, response) {
+              const callback = (error, data, response) => {
                 console.log(response)
+                this.isLoading = false
                 if (error) {
                   alert(response.error);
                 } else {
@@ -253,6 +260,7 @@
                   console.log('API called successfully. Returned data: ' + data);
                 }
               };
+              this.isLoading = true
               api.editDocumentDocxReplaceMulti(reqConfig, callback);
 
             }

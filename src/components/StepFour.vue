@@ -1,7 +1,7 @@
 <template>
     <div style="padding: 2rem 3rem; text-align: left;">
         <template v-for="(item, index) in form.witnesses">
-            <div class="columns" :key="form.witnesses[index].last_name">
+            <div class="columns" :key="index">
                 <div class="field column is-one-fifth">
                     <label class="label">Ім'я</label>
                     <div class="control">

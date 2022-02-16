@@ -87,6 +87,8 @@
     import {validationMixin} from 'vuelidate'
     import {required, email} from 'vuelidate/lib/validators'
     import regions from '../regions'
+    import "vue-select/dist/vue-select.css";
+
     export default {
         props: ['clickedNext', 'currentStep'],
         mixins: [validationMixin],
